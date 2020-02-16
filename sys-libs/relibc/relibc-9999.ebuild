@@ -9,10 +9,10 @@ HOMEPAGE="https://www.redox-os.org/ https://github.com/redox-os/relibc"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
-IUSE="nightly"
+IUSE=""
 inherit git-r3 cargo
 
-DEPEND="dev-lang/rust"
+DEPEND="dev-lang/rust[nightly]"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 EGIT_REPO_URI="https://gitlab.redox-os.org/redox-os/relibc.git"
@@ -24,7 +24,7 @@ EGIT_REPO_URI="https://gitlab.redox-os.org/redox-os/relibc.git"
 
 src_unpack() {
 	git-r3_src_unpack || die
-	cd ${S}
+	cd "${S}"
 	cargo check --all || die
 	cd cbindgen
 	cargo check

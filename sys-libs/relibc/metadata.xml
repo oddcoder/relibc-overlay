@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>ahmedsoliman0x666@gmail.com</email>
+		<name>Ahmed soliman</name>
+	</maintainer>
+	<longdescription lang="en">
+			Relibc is a portable POSIX C standard library written in Rust.
+			It is designed as a safer alternative to a C standard libraries
+			written in C. At the time being, relibc supports only
+			amd64 and arch64.
+	</longdescription>
+</pkgmetadata>
