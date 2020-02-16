@@ -10,7 +10,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 IUSE=""
-inherit git-r3 cargo
+inherit git-r3 #cargo
 
 DEPEND="dev-lang/rust[nightly]"
 RDEPEND="${DEPEND}"
