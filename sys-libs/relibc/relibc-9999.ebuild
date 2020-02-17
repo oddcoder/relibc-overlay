@@ -16,7 +16,9 @@ DEPEND="dev-lang/rust[nightly]"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 EGIT_REPO_URI="https://gitlab.redox-os.org/redox-os/relibc.git"
-
+PATCHES=(
+	"${FILESDIR}/0001-Add-install-target-for-gentoo.patch"
+)
 #dependencies
 # cbindgen
 # openlibm

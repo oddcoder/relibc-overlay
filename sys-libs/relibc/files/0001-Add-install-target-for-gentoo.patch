@@ -1,0 +1,45 @@
+From e199205e17832b2f5e6501e22e5ae11d78aa1235 Mon Sep 17 00:00:00 2001
+From: oddcoder <ahmedsoliman@oddcoder.com>
+Date: Tue, 18 Feb 2020 00:50:58 +0200
+Subject: [PATCH] Add install target for gentoo
+
+We need a $LIB env variable, that variable would be lib64 in case of
+multilib or lib in case of non multilib
+---
+ Makefile | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index 96adeae..36dff50 100644
+--- a/Makefile
++++ b/Makefile
+@@ -79,6 +79,26 @@ install-libs: libs
+ 
+ install: install-headers install-libs
+ 
++gentoo-install-libs: libs
++	cp -v "$(BUILD)/release/libc.a" "/$(LIB)"
++	cp -v "$(BUILD)/release/libc.so" "/$(LIB)"
++	cp -v "$(BUILD)/release/crt0.o" "/$(LIB)"
++	cp -v "$(BUILD)/release/crti.o" "/$(LIB)"
++	cp -v "$(BUILD)/release/crtn.o" "/$(LIB)"
++	cp -v "$(BUILD)/release/ld_so" "/$(LIB)/ld64.so.1"
++	cp -v "$(BUILD)/openlibm/libopenlibm.a" "/$(LIB)/libm.a"
++	cp -v "$(BUILD)/pthreads-emb/libpthread.a" "/$(LIB)/libpthread.a"
++
++gentoo-install-headers: headers
++	cp -rv "include"/* "/usr/include"
++	cp -rv "$(BUILD)/include"/* "/usr/include"
++	cp -v "openlibm/include"/*.h "/usr/include"
++	cp -v "openlibm/src"/*.h "/usr/include"
++	cp -v "pthreads-emb/"*.h "/usr/include"
++
++
++gentoo-install: gentoo-install-headers gentoo-install-libs
++
+ sysroot: all
+ 	rm -rf $@
+ 	rm -rf $@.partial
+-- 
+2.24.1
+
