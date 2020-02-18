@@ -1,4 +1,4 @@
-From fe45f8a9f5e078178a032dbd45b05cfc56342c29 Mon Sep 17 00:00:00 2001
+From 453f07786410a66fba73e4a767ed31af9434eb96 Mon Sep 17 00:00:00 2001
 From: oddcoder <ahmedsoliman@oddcoder.com>
 Date: Tue, 18 Feb 2020 00:50:58 +0200
 Subject: [PATCH] Add install target for gentoo
@@ -6,27 +6,28 @@ Subject: [PATCH] Add install target for gentoo
 We need a $LIB env variable, that variable would be lib64 in case of
 multilib or lib in case of non multilib
 ---
- Makefile | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ Makefile | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
 diff --git a/Makefile b/Makefile
-index 96adeae..f6a2969 100644
+index 96adeae..833bceb 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -79,6 +79,28 @@ install-libs: libs
+@@ -79,6 +79,29 @@ install-libs: libs
  
  install: install-headers install-libs
  
 +gentoo-install-libs: libs
 +	mkdir -p "$(TMP)/$(LIB)"
-+	cp -v "$(BUILD)/release/libc.a" "$(TMP)/$(LIB)"
++	mkdir -p "$(TMP)/usr/$(LIB)"
++	cp -v "$(BUILD)/release/libc.a" "$(TMP)/usr/$(LIB)"
 +	cp -v "$(BUILD)/release/libc.so" "$(TMP)/$(LIB)"
-+	cp -v "$(BUILD)/release/crt0.o" "$(TMP)/$(LIB)"
-+	cp -v "$(BUILD)/release/crti.o" "$(TMP)/$(LIB)"
-+	cp -v "$(BUILD)/release/crtn.o" "$(TMP)/$(LIB)"
++	cp -v "$(BUILD)/release/crt0.o" "$(TMP)/usr/$(LIB)"
++	cp -v "$(BUILD)/release/crti.o" "$(TMP)/usr/$(LIB)"
++	cp -v "$(BUILD)/release/crtn.o" "$(TMP)/usr/$(LIB)"
 +	cp -v "$(BUILD)/release/ld_so" "$(TMP)/$(LIB)/ld64.so.1"
-+	cp -v "$(BUILD)/openlibm/libopenlibm.a" "$(TMP)/$(LIB)/libm.a"
-+	cp -v "$(BUILD)/pthreads-emb/libpthread.a" "$(TMP)/$(LIB)/libpthread.a"
++	cp -v "$(BUILD)/openlibm/libopenlibm.a" "$(TMP)/usr/$(LIB)/libm.a"
++	cp -v "$(BUILD)/pthreads-emb/libpthread.a" "$(TMP)/usr/$(LIB)/libpthread.a"
 +
 +gentoo-install-headers: headers
 +	mkdir -p "$(TMP)/usr/include"
