@@ -1,4 +1,4 @@
-From 63340d11ad9cf56b1b66c2835122e11e27f6ba94 Mon Sep 17 00:00:00 2001
+From fe45f8a9f5e078178a032dbd45b05cfc56342c29 Mon Sep 17 00:00:00 2001
 From: oddcoder <ahmedsoliman@oddcoder.com>
 Date: Tue, 18 Feb 2020 00:50:58 +0200
 Subject: [PATCH] Add install target for gentoo
@@ -6,18 +6,19 @@ Subject: [PATCH] Add install target for gentoo
 We need a $LIB env variable, that variable would be lib64 in case of
 multilib or lib in case of non multilib
 ---
- Makefile | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ Makefile | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
 diff --git a/Makefile b/Makefile
-index 96adeae..ef31e18 100644
+index 96adeae..f6a2969 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -79,6 +79,26 @@ install-libs: libs
+@@ -79,6 +79,28 @@ install-libs: libs
  
  install: install-headers install-libs
  
 +gentoo-install-libs: libs
++	mkdir -p "$(TMP)/$(LIB)"
 +	cp -v "$(BUILD)/release/libc.a" "$(TMP)/$(LIB)"
 +	cp -v "$(BUILD)/release/libc.so" "$(TMP)/$(LIB)"
 +	cp -v "$(BUILD)/release/crt0.o" "$(TMP)/$(LIB)"
@@ -28,6 +29,7 @@ index 96adeae..ef31e18 100644
 +	cp -v "$(BUILD)/pthreads-emb/libpthread.a" "$(TMP)/$(LIB)/libpthread.a"
 +
 +gentoo-install-headers: headers
++	mkdir -p "$(TMP)/usr/include"
 +	cp -rv "include"/* "$(TMP)/usr/include"
 +	cp -rv "$(BUILD)/include"/* "$(TMP)/usr/include"
 +	cp -v "openlibm/include"/*.h "$(TMP)/usr/include"
