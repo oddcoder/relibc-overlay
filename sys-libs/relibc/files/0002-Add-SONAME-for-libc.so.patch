@@ -1,0 +1,25 @@
+From c661a2cd0421087f3294c0ce9166c92dd838e85b Mon Sep 17 00:00:00 2001
+From: oddcoder <ahmedsoliman@oddcoder.com>
+Date: Tue, 18 Feb 2020 20:35:53 +0200
+Subject: [PATCH 2/2] Add SONAME for libc.so
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 833bceb..97c4ebe 100644
+--- a/Makefile
++++ b/Makefile
+@@ -162,7 +162,7 @@ $(BUILD)/release/libc.a: $(BUILD)/release/librelibc.a $(BUILD)/pthreads-emb/libp
+ 	$(AR) -M < "$@.mri"
+ 
+ $(BUILD)/release/libc.so: $(BUILD)/release/librelibc.a $(BUILD)/pthreads-emb/libpthread.a $(BUILD)/openlibm/libopenlibm.a
+-	$(CC) -nostdlib -shared -Wl,--allow-multiple-definition -Wl,--whole-archive $^ -Wl,--no-whole-archive -o $@
++	$(CC) -nostdlib -shared -Wl,--allow-multiple-definition -Wl,--whole-archive $^ -Wl,--no-whole-archive -Wl,-soname,libc.so.6 -o $@
+ 
+ $(BUILD)/release/librelibc.a: $(SRC)
+ 	CARGO_INCREMENTAL=0 $(CARGO) rustc --release $(CARGOFLAGS) -- --emit link=$@ $(RUSTCFLAGS)
+-- 
+2.24.1
+
