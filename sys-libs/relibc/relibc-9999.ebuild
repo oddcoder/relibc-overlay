@@ -10,7 +10,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 IUSE=""
-inherit git-r3 #cargo
+inherit git-r3 multilib #cargo
 
 DEPEND="dev-lang/rust[nightly]"
 RDEPEND="${DEPEND}"
@@ -33,5 +33,9 @@ src_unpack() {
 }
 
 src_compile() {
-	make libs VERBOSE=1 || die
+	emake libs VERBOSE=1 || die
+}
+
+src_install() {
+	emake gentoo-install LIB=$(get_libdir)
 }
