@@ -39,5 +39,5 @@ src_compile() {
 
 src_install() {
 	emake gentoo-install LIB=$(get_libdir) TMP=${D}
-	gen_usr_ldscript -a c
+	gen_usr_ldscript libc.so
 }
