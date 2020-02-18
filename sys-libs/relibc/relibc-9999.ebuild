@@ -10,7 +10,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 IUSE=""
-inherit git-r3 multilib #cargo
+inherit git-r3 multilib toolchain-funcs #cargo
 
 DEPEND="dev-lang/rust[nightly]"
 RDEPEND="${DEPEND}"
@@ -38,4 +38,5 @@ src_compile() {
 
 src_install() {
 	emake gentoo-install LIB=$(get_libdir) TMP=${D}
+	gen_usr_ldscript -a c
 }
