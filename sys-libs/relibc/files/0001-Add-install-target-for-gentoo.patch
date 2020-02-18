@@ -1,4 +1,4 @@
-From e199205e17832b2f5e6501e22e5ae11d78aa1235 Mon Sep 17 00:00:00 2001
+From 63340d11ad9cf56b1b66c2835122e11e27f6ba94 Mon Sep 17 00:00:00 2001
 From: oddcoder <ahmedsoliman@oddcoder.com>
 Date: Tue, 18 Feb 2020 00:50:58 +0200
 Subject: [PATCH] Add install target for gentoo
@@ -10,7 +10,7 @@ multilib or lib in case of non multilib
  1 file changed, 20 insertions(+)
 
 diff --git a/Makefile b/Makefile
-index 96adeae..36dff50 100644
+index 96adeae..ef31e18 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -79,6 +79,26 @@ install-libs: libs
@@ -18,21 +18,21 @@ index 96adeae..36dff50 100644
  install: install-headers install-libs
  
 +gentoo-install-libs: libs
-+	cp -v "$(BUILD)/release/libc.a" "/$(LIB)"
-+	cp -v "$(BUILD)/release/libc.so" "/$(LIB)"
-+	cp -v "$(BUILD)/release/crt0.o" "/$(LIB)"
-+	cp -v "$(BUILD)/release/crti.o" "/$(LIB)"
-+	cp -v "$(BUILD)/release/crtn.o" "/$(LIB)"
-+	cp -v "$(BUILD)/release/ld_so" "/$(LIB)/ld64.so.1"
-+	cp -v "$(BUILD)/openlibm/libopenlibm.a" "/$(LIB)/libm.a"
-+	cp -v "$(BUILD)/pthreads-emb/libpthread.a" "/$(LIB)/libpthread.a"
++	cp -v "$(BUILD)/release/libc.a" "$(TMP)/$(LIB)"
++	cp -v "$(BUILD)/release/libc.so" "$(TMP)/$(LIB)"
++	cp -v "$(BUILD)/release/crt0.o" "$(TMP)/$(LIB)"
++	cp -v "$(BUILD)/release/crti.o" "$(TMP)/$(LIB)"
++	cp -v "$(BUILD)/release/crtn.o" "$(TMP)/$(LIB)"
++	cp -v "$(BUILD)/release/ld_so" "$(TMP)/$(LIB)/ld64.so.1"
++	cp -v "$(BUILD)/openlibm/libopenlibm.a" "$(TMP)/$(LIB)/libm.a"
++	cp -v "$(BUILD)/pthreads-emb/libpthread.a" "$(TMP)/$(LIB)/libpthread.a"
 +
 +gentoo-install-headers: headers
-+	cp -rv "include"/* "/usr/include"
-+	cp -rv "$(BUILD)/include"/* "/usr/include"
-+	cp -v "openlibm/include"/*.h "/usr/include"
-+	cp -v "openlibm/src"/*.h "/usr/include"
-+	cp -v "pthreads-emb/"*.h "/usr/include"
++	cp -rv "include"/* "$(TMP)/usr/include"
++	cp -rv "$(BUILD)/include"/* "$(TMP)/usr/include"
++	cp -v "openlibm/include"/*.h "$(TMP)/usr/include"
++	cp -v "openlibm/src"/*.h "$(TMP)/usr/include"
++	cp -v "pthreads-emb/"*.h "$(TMP)/usr/include"
 +
 +
 +gentoo-install: gentoo-install-headers gentoo-install-libs

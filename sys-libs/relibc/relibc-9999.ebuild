@@ -37,5 +37,5 @@ src_compile() {
 }
 
 src_install() {
-	emake gentoo-install LIB=$(get_libdir)
+	emake gentoo-install LIB=$(get_libdir) TMP=${D}
 }
